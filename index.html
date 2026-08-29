@@ -1,0 +1,1971 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>結満株式会社 | 解体・撤去工事</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon.png" />
+    <link rel="shortcut icon" href="images/logo/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* ===== Scroll-based 3D enhancement layer ===== */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .hero {
+        overflow: hidden;
+        perspective: 1400px;
+      }
+      .hero-grid-bg,
+      .hero-bg-overlay,
+      .hero-kanji,
+      .hero-content,
+      .hero-scroll-indicator {
+        will-change: transform, opacity;
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: perspective(1200px) translateY(46px) translateZ(-40px)
+          rotateX(6deg);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      [data-reveal].in-view {
+        opacity: 1;
+        transform: perspective(1200px) translateY(0) translateZ(0) rotateX(0deg);
+      }
+
+      [data-tilt] {
+        transform-style: preserve-3d;
+        transition:
+          transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.4s ease;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        [data-tilt] {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <a href="#" class="nav-logo">
+        <img
+          src="images/logo/nav-logo.png"
+          alt="Yuimitsu logo"
+          class="nav-logo-img"
+        />
+        <div class="logo-text">
+          <span id="companyName"></span><span id="companySubtitle"></span>
+        </div>
+      </a>
+      <button
+        type="button"
+        class="translate-btn-mobile"
+        id="translateBtnMobile"
+        onclick="toggleTranslate()"
+      >
+        English
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" id="navAbout">About Us</a></li>
+        <li><a href="#services" id="navServices">サービス</a></li>
+        <li><a href="#why-choose" id="navWhyChoose">Why Choose Us</a></li>
+        <li><a href="#work-flow" id="navWorkFlow">Our Process</a></li>
+        <li><a href="#area" id="navArea">Service Area</a></li>
+        <li><a href="#promise" id="navPromise">Our Commitment</a></li>
+        <li class="desktop-only">
+          <button
+            type="button"
+            class="translate-btn"
+            id="translateBtn"
+            onclick="toggleTranslate()"
+          >
+            English
+          </button>
+        </li>
+        <li>
+          <a href="#contact" class="nav-cta" id="navContact">お問い合わせ</a>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <section class="hero" id="home">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-content">
+        <img
+          src="images/logo/logo-trans.png"
+          alt="Yuimitsu Demolition &amp; Construction"
+          class="hero-logo-img"
+        />
+        <img
+          src="images/logo/logo-sub.png" 
+          class="hero-logo-sub"
+        />
+        
+        <!-- <div class="hero-kanji" id="heroKanji"></div>
+        -->
+        <h1 class="hero-title">
+          <!--
+          <span id="heroCompanyName">YUIMITSU</span>
+          -->
+          <strong id="heroFullNameSuffix"></strong>
+        </h1>
+          
+        <div class="hero-divider"></div>
+        <p class="hero-main-slogan" id="heroMainSlogan"></p>
+        <p class="hero-sub-slogan" id="heroSubSlogan"></p>
+        <!-- 
+        <p class="hero-introduction" id="heroIntroduction"></p>
+         -->
+        
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary" id="heroPrimaryBtn"
+            >ご相談を依頼する</a
+          >
+          <a href="#about" class="btn btn-outline" id="heroSecondaryBtn"
+            >結満の想いを見る</a
+          >
+        </div>
+      </div>
+      <div
+        class="hero-scroll-indicator"
+        onclick="
+          document
+            .getElementById('about')
+            .scrollIntoView({ behavior: 'smooth' })
+        "
+      >
+        <span id="scrollLabel">スクロール</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+    <section class="meaning-section" id="about">
+      <div class="section-container">
+        <p class="section-label" id="meaningLabel"></p>
+        <h2 class="section-title" id="meaningTitle"></h2>
+        <p
+          class="meaning-desc"
+          id="meaningDesc"
+        ></p>
+        <div class="meaning-intro-panel" id="meaningIntroPanel">
+          <p class="meaning-intro" id="meaningIntro"></p>
+        </div>
+        <div class="meaning-grid">
+          <div class="meaning-card">
+            <img
+              src="images/connection-bonds.jpg"
+              alt="つながりと信頼"
+              class="card-img"
+              id="cardYuiImage"
+            />
+            <div class="card-content">
+              <div class="card-kanji" id="kanjiYuiCard"></div>
+              <div class="card-reading" id="cardYuiReading"></div>
+              <h3 id="cardYuiTitle"></h3>
+              <p id="cardYuiText"></p>
+            </div>
+          </div>
+          <div class="meaning-card">
+            <img
+              src="images/fulfillment-abundance.jpg"
+              alt="満ち足りた価値と豊かさ"
+              class="card-img"
+              id="cardMitsuImage"
+            />
+            <div class="card-content">
+              <div class="card-kanji" id="kanjiMitsuCard"></div>
+              <div class="card-reading" id="cardMitsuReading"></div>
+              <h3 id="cardMitsuTitle"></h3>
+              <p id="cardMitsuText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="section-container">
+        <p class="section-label" id="servicesLabel"></p>
+        <h2 class="section-title" id="servicesTitle"></h2>
+        <p
+          style="color: var(--text-muted); max-width: 550px; margin-top: 0.5rem"
+          id="servicesDesc"
+        ></p>
+        <div class="services-grid" id="servicesGrid"></div>
+        <div hidden="true" class="services-extra" id="servicesExtra" style="display: none">
+          <h3 id="servicesExtraTitle"></h3>
+          <ul id="servicesExtraList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="values-section" id="why-choose">
+      <div class="section-container">
+        <p class="section-label" id="valuesLabel"></p>
+        <h2 class="section-title" id="valuesTitle"></h2>
+        <div class="values-list" id="valuesList"></div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS SECTION ============ -->
+    <section class="process-section" id="work-flow">
+      <div class="section-container">
+        <p class="section-label" id="processLabel"></p>
+        <h2 class="section-title" id="processTitle"></h2>
+        <p
+          style="color: var(--text-muted); max-width: 600px; margin-top: 0.5rem"
+          id="processDesc"
+        ></p>
+        <div class="process-timeline" id="processTimeline"></div>
+      </div>
+    </section>
+
+    <section class="meaning-section" id="area">
+      <div class="section-container">
+        <p class="section-label" id="areaLabel"></p>
+        <h2 class="section-title" id="areaTitle"></h2>
+        <p class="meaning-desc" id="areaBaseLocation"></p>
+        <div class="services-extra area-map-panel" id="areaPanel" style="display: none">
+          <ul class="area-map-legend" id="areaLegendList" aria-label="Service area regions"></ul>
+          <div class="area-map-viewport">
+            <div id="areaLeafletMap" class="area-leaflet-map" aria-label="Service area map"></div>
+          </div>
+          <p class="meaning-desc" id="areaNote" style="margin-top: 0.9rem"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="section-container">
+        <p class="section-label" id="galleryLabel"></p>
+        <h2 class="section-title" id="galleryTitle"></h2>
+        <p class="meaning-desc" id="galleryDesc"></p>
+
+        <div class="gallery-albums" id="galleryAlbums"></div>
+
+        <div class="gallery-carousel">
+          <div class="gallery-viewport">
+            <div class="gallery-track" id="galleryTrack"></div>
+          </div>
+        </div>
+
+        <div class="gallery-pagination" aria-label="Gallery pagination">
+          <button class="pag-btn" id="pagFirst" type="button" aria-label="First slide">«</button>
+          <button class="pag-btn" id="pagPrev" type="button" aria-label="Previous slide">‹</button>
+          <span class="pag-current" id="pagCurrent">0 / 0</span>
+          <button class="pag-btn" id="pagNext" type="button" aria-label="Next slide">›</button>
+          <button class="pag-btn" id="pagLast" type="button" aria-label="Last slide">»</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="gallery-modal" id="galleryModal" aria-hidden="true">
+      <div class="gallery-modal-backdrop" id="galleryModalBackdrop"></div>
+      <div class="gallery-modal-panel" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="gallery-modal-toolbar">
+          <button type="button" class="gallery-modal-btn" id="galleryZoomOut" aria-label="Zoom out">-</button>
+          <button type="button" class="gallery-modal-btn" id="galleryZoomIn" aria-label="Zoom in">+</button>
+          <button type="button" class="gallery-modal-btn" id="galleryZoomReset" aria-label="Reset zoom">Reset</button>
+          <button type="button" class="gallery-modal-btn gallery-modal-close" id="galleryModalClose" aria-label="Close image viewer">×</button>
+        </div>
+        <div class="gallery-modal-stage" id="galleryModalStage">
+          <img id="galleryModalImage" class="gallery-modal-image" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <section class="philosophy-banner" id="promise">
+      <div class="section-container">
+        <p class="section-label" id="promiseLabel"></p>
+        <h2 class="section-title" id="promiseTitle"></h2>
+        <p class="banner-text" id="promiseContent"></p>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="contact-card">
+        <h3 id="contactTitle"></h3>
+        <p id="contactDesc"></p>
+        <div class="quote-form-wrap">
+          <h4 class="quote-form-title" id="quoteFormTitle">
+            Quick Quote Request
+          </h4>
+          <p class="quote-form-description" id="quoteFormDescription">
+            Share your project details for an estimate.
+          </p>
+          <form id="quoteForm" class="quote-form" novalidate>
+            <div class="quote-grid">
+              <div class="quote-field">
+                <label for="quoteName" id="quoteNameLabel"
+                  >Contact Name *</label
+                >
+                <input
+                  type="text"
+                  id="quoteName"
+                  name="name"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="quote-field">
+                <label for="quoteCompany" id="quoteCompanyLabel">Company</label>
+                <input
+                  type="text"
+                  id="quoteCompany"
+                  name="company"
+                  autocomplete="organization"
+                />
+              </div>
+              <div class="quote-field">
+                <label for="quoteEmail" id="quoteEmailLabel">Email *</label>
+                <input
+                  type="email"
+                  id="quoteEmail"
+                  name="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="quote-field">
+                <label for="quotePhone" id="quotePhoneLabel">Phone</label>
+                <input
+                  type="tel"
+                  id="quotePhone"
+                  name="phone"
+                  autocomplete="tel"
+                />
+              </div>
+              <div class="quote-field">
+                <label for="quoteProjectType" id="quoteProjectTypeLabel"
+                  >Project Type *</label
+                >
+                <select
+                  id="quoteProjectType"
+                  name="projectType"
+                  required
+                ></select>
+              </div>
+              <div class="quote-field">
+                <label for="quoteTimeline" id="quoteTimelineLabel"
+                  >Timeline</label
+                >
+                <input type="text" id="quoteTimeline" name="timeline" />
+              </div>
+              <div class="quote-field">
+                <label for="quoteAddress" id="quoteAddressLabel"
+                  >Site Address *</label
+                >
+                <input type="text" id="quoteAddress" name="address" required />
+              </div>
+              <div class="quote-field">
+                <label for="quoteBudget" id="quoteBudgetLabel">Budget</label>
+                <select id="quoteBudget" name="budget"></select>
+              </div>
+            </div>
+            <div class="quote-field">
+              <label for="quoteDetails" id="quoteDetailsLabel"
+                >Project Details *</label
+              >
+              <textarea
+                id="quoteDetails"
+                name="details"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <label class="quote-consent" for="quoteConsent">
+              <input
+                type="checkbox"
+                id="quoteConsent"
+                name="consent"
+                required
+              />
+              <span id="quoteConsentLabel"
+                >I agree to be contacted regarding this request.</span
+              >
+            </label>
+            <div class="quote-actions">
+              <button type="submit" class="btn btn-primary" id="quoteSubmitBtn">
+                Send Quote Request
+              </button>
+              <p class="quote-note" id="quoteFormNote">
+                Typical response within one business day.
+              </p>
+            </div>
+            <p class="quote-status" id="quoteStatus" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-item">
+            <!-- <span class="ci-icon">📞</span> <span id="phone"></span> -->
+            <img
+              src="images/logo/line-yuimitsu.jpg"
+              class="qr-line"
+            />
+          </div>
+          <!-- <div hidden="true" class="xcontact-info-item">
+            <span class="ci-icon">📍</span> <span id="address"></span>
+          </div> -->
+        </div>        
+        <div class="contact-info-item-email">
+          <span class="ci-icon">✉️</span> <span id="email"></span>
+        </div>
+        
+        <a href="#" class="btn btn-primary" id="emailLink"
+          >メールで問い合わせる</a
+        >
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img
+        src="images/logo/nav-logo.png"
+        alt="Yuimitsu logo"
+        class="footer-logo-img"
+      />
+      <div class="footer-logo">
+        <span id="footerCompanyName"></span
+        ><span id="footerCompanySuffix"> 株式会社</span>
+      </div>
+      <p class="footer-tagline" id="footerTagline"></p>
+      <p class="copyright" id="copyright"></p>
+    </footer>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const SUPPORTED_LANGS = new Set(["ja", "en"]);
+      const DEFAULT_LANG = "ja";
+      const GALLERY_ROOT = "images/Gallery/";
+      const GALLERY_MANIFEST_PATH = `${GALLERY_ROOT}albums.json`;
+      const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif"]);
+      let currentLang = DEFAULT_LANG;
+      let currentLocaleData = null;
+      let galleryManifestPromise = null;
+
+      const galleryModalState = {
+        open: false,
+        scale: 1,
+        minScale: 1,
+        maxScale: 3.5,
+        scrollY: 0,
+      };
+
+      function applyGalleryModalZoom() {
+        const img = document.getElementById("galleryModalImage");
+        img.style.setProperty("--gallery-modal-scale", String(galleryModalState.scale));
+      }
+
+      function setGalleryModalZoom(nextScale) {
+        galleryModalState.scale = Math.max(
+          galleryModalState.minScale,
+          Math.min(nextScale, galleryModalState.maxScale),
+        );
+        applyGalleryModalZoom();
+      }
+
+      function openGalleryModal(src, alt) {
+        const modal = document.getElementById("galleryModal");
+        const img = document.getElementById("galleryModalImage");
+        img.src = src;
+        img.alt = alt || "";
+        galleryModalState.open = true;
+        setGalleryModalZoom(1);
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+
+        galleryModalState.scrollY =
+          window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        document.body.style.overflow = "hidden";
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: galleryModalState.scrollY, behavior: "auto" });
+        });
+      }
+
+      function closeGalleryModal() {
+        const modal = document.getElementById("galleryModal");
+        const img = document.getElementById("galleryModalImage");
+        galleryModalState.open = false;
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = "";
+
+        img.src = "";
+        img.alt = "";
+        setGalleryModalZoom(1);
+      }
+
+      function initGalleryModal() {
+        const modal = document.getElementById("galleryModal");
+        if (!modal || modal.dataset.bound === "true") return;
+        modal.dataset.bound = "true";
+
+        const stage = document.getElementById("galleryModalStage");
+        const closeBtn = document.getElementById("galleryModalClose");
+        const backdrop = document.getElementById("galleryModalBackdrop");
+        const zoomInBtn = document.getElementById("galleryZoomIn");
+        const zoomOutBtn = document.getElementById("galleryZoomOut");
+        const resetBtn = document.getElementById("galleryZoomReset");
+
+        closeBtn.onclick = closeGalleryModal;
+        backdrop.onclick = closeGalleryModal;
+        zoomInBtn.onclick = () => setGalleryModalZoom(galleryModalState.scale + 0.2);
+        zoomOutBtn.onclick = () => setGalleryModalZoom(galleryModalState.scale - 0.2);
+        resetBtn.onclick = () => setGalleryModalZoom(1);
+
+        stage.onwheel = (event) => {
+          event.preventDefault();
+          const delta = event.deltaY < 0 ? 0.16 : -0.16;
+          setGalleryModalZoom(galleryModalState.scale + delta);
+        };
+
+        document.addEventListener("keydown", (event) => {
+          if (!galleryModalState.open) return;
+          if (event.key === "Escape") {
+            closeGalleryModal();
+            return;
+          }
+          if (event.key === "+" || event.key === "=") {
+            setGalleryModalZoom(galleryModalState.scale + 0.2);
+            return;
+          }
+          if (event.key === "-" || event.key === "_") {
+            setGalleryModalZoom(galleryModalState.scale - 0.2);
+            return;
+          }
+          if (event.key === "0") {
+            setGalleryModalZoom(1);
+          }
+        });
+      }
+
+      function getLocalePath(lang) {
+        return lang === "ja" ? "contents-jp.json" : "contents-en.json";
+      }
+
+      function normalizeLocaleData(raw, lang) {
+        if (raw && raw.company && raw.sections) {
+          return raw;
+        }
+
+        const isJa = lang === "ja";
+        const fallbackName = isJa ? "結満株式会社" : "YUIMITSU Co., Ltd.";
+        const fallbackShort = isJa ? "結満" : "YUIMITSU";
+
+        const contact = raw.contact || {};
+        const about = raw.about_us || {};
+        const services = raw.services || {};
+        const values = raw.why_choose_us || {};
+        const process = raw.work_flow || {};
+        const gallery = raw.gallery || {};
+        const area = raw.area || {};
+        const promise = raw.promise || {};
+        const footer = raw.footer || {};
+
+        const company = {
+          kanji: contact.company_kanji || "結満",
+          kanjiYui: contact.company_kanjiYui || "結",
+          kanjiMitsu: contact.company_kanjiMitsu || "満",
+          name: contact.company_short_name || fallbackShort,
+          fullName: raw.company_name || contact.company_name || fallbackName,
+          subtitle: contact.company_subtitle || "",
+          heroTagline:
+            contact.hero_tagline || raw.sub_slogan || raw.main_slogan || "",
+          phone: contact.phone || "",
+          email: contact.email || "",
+          address: contact.address || "",
+          copyright: contact.copyright || "",
+        };
+
+        const ui = {
+          nav: {
+            meaning:
+              about.label ||
+              about.heading ||
+              raw.ui?.nav?.meaning ||
+              (isJa ? "私たちの想い" : "About Us"),
+            services:
+              services.label ||
+              services.heading ||
+              raw.ui?.nav?.services ||
+              (isJa ? "サービス" : "Services"),
+            values:
+              values.label ||
+              values.heading ||
+              raw.ui?.nav?.values ||
+              (isJa ? "理念" : "Why Choose Us"),
+            process:
+              process.label ||
+              process.heading ||
+              raw.ui?.nav?.process ||
+              (isJa ? "ご依頼の流れ" : "Our Process"),
+            area:
+              area.heading ||
+              raw.ui?.nav?.area ||
+              (isJa ? "対応エリア" : "Service Area"),
+            promise:
+              promise.heading ||
+              raw.ui?.nav?.promise ||
+              (isJa ? "私たちのお約束" : "Our Commitment"),
+            contact:
+              contact.heading ||
+              raw.ui?.nav?.contact ||
+              (isJa ? "お問い合わせ" : "Contact"),
+          },
+          aria: {
+            menu: raw.ui?.aria?.menu || (isJa ? "メニュー" : "Menu"),
+          },
+          hero: {
+            primaryButton:
+              raw.ui?.hero?.primaryButton ||
+              (isJa ? "ご相談を依頼する" : "Request a Consultation"),
+            secondaryButton:
+              raw.ui?.hero?.secondaryButton ||
+              (isJa ? "結満の想いを見る" : "Our Story"),
+            scrollLabel: raw.ui?.hero?.scrollLabel || (isJa ? "スクロール" : "Scroll"),
+          },
+          contact: {
+            button:
+              raw.ui?.contact?.button ||
+              (isJa ? "メールで問い合わせる" : "Send an Email"),
+          },
+          footer: {
+            companySuffix:
+              raw.ui?.footer?.companySuffix || (isJa ? " 株式会社" : " Co., Ltd."),
+          },
+          images: {
+            yuiAlt: raw.ui?.images?.yuiAlt || (isJa ? "つながりと信頼" : "Connection and trust"),
+            mitsuAlt:
+              raw.ui?.images?.mitsuAlt ||
+              (isJa ? "満ち足りた価値と豊かさ" : "Fulfillment and satisfaction"),
+          },
+        };
+
+        const servicesUi = {
+          extraTitle:
+            raw.ui?.services?.extraTitle ||
+            (isJa ? "追加サービス" : "Additional Services"),
+        };
+
+        const valuesItems = Array.isArray(values.items)
+          ? values.items
+          : Array.isArray(values.points)
+            ? values.points.map((point, idx) => ({
+                number: String(idx + 1).padStart(2, "0"),
+                title: point.title,
+                description: point.description,
+              }))
+            : [];
+
+        const processItems = Array.isArray(process.items)
+          ? process.items
+          : Array.isArray(process.steps)
+            ? process.steps.map((step, idx) => ({
+                number: step.step || String(idx + 1).padStart(2, "0"),
+                title: step.title,
+                description: step.description,
+              }))
+            : [];
+
+        const defaultServiceIcons = [
+          "fa-solid fa-arrow-rotate-left",
+          "fa-solid fa-screwdriver-wrench",
+          "fa-solid fa-tree",
+          "fa-solid fa-trash-can",
+        ];
+
+        const serviceItems = Array.isArray(services.items)
+          ? services.items
+          : Array.isArray(services.core_services)
+            ? services.core_services.map((item, idx) => ({
+                icon: defaultServiceIcons[idx] || "fa-solid fa-circle-check",
+                title: item.name,
+                description: item.description,
+              }))
+            : [];
+
+        const additionalServiceItems = Array.isArray(services.additional_services)
+          ? services.additional_services
+              .map((entry) => {
+                if (typeof entry === "string") {
+                  const title = entry.trim();
+                  if (!title) return null;
+                  return {
+                    icon: "fa-solid fa-circle-check",
+                    title,
+                    description: "",
+                  };
+                }
+                if (entry && typeof entry === "object") {
+                  const title = String(entry.title || entry.name || "").trim();
+                  if (!title) return null;
+                  return {
+                    icon: entry.icon || "fa-solid fa-circle-check",
+                    title,
+                    description: String(entry.description || "").trim(),
+                  };
+                }
+                return null;
+              })
+              .filter(Boolean)
+          : [];
+
+        return {
+          meta: raw.meta || { title: fallbackName },
+          company_name: raw.company_name || company.fullName,
+          main_slogan: raw.main_slogan || "",
+          sub_slogan: raw.sub_slogan || "",
+          introduction: raw.introduction || "",
+          ui,
+          servicesUi,
+          company,
+          sections: {
+            meaning: {
+              label: about.label || about.heading || "",
+              title: about.title || about.heading || "",
+              description: about.description || about.content || raw.introduction || "",
+              introduction: raw.introduction || "",
+              cardYui: about.cardYui || { reading: "", title: "", text: "" },
+              cardMitsu: about.cardMitsu || { reading: "", title: "", text: "" },
+            },
+            philosophy: {
+              text: about.philosophy || raw.introduction || "",
+            },
+            services: {
+              label: services.label || services.heading || "",
+              title: services.title || services.heading || "",
+              description: services.description || "",
+              items: serviceItems,
+              additional_services: additionalServiceItems,
+            },
+            values: {
+              label: values.label || values.heading || "",
+              title: values.title || values.heading || "",
+              items: valuesItems,
+            },
+            process: {
+              label: process.label || process.heading || "",
+              title: process.title || process.heading || "",
+              description: process.description || "",
+              items: processItems,
+            },
+            gallery: {
+              label:
+                gallery.label ||
+                gallery.heading ||
+                (isJa ? "施工実績" : "Projects"),
+              title:
+                gallery.title ||
+                (isJa
+                  ? "施工 <strong>ギャラリー</strong>"
+                  : "Project <strong>Gallery</strong>"),
+              description:
+                gallery.description ||
+                (isJa
+                  ? "各工事カテゴリの実績写真をご覧いただけます。"
+                  : "Browse our work photos by project category."),
+              albums: Array.isArray(gallery.albums) ? gallery.albums : [],
+            },
+            contact: {
+              title: contact.title || contact.heading || "",
+              description: contact.description || contact.text || "",
+              quoteForm: contact.quoteForm || null,
+            },
+            area: {
+              label: area.subheading || area.heading || "",
+              title: area.heading || "",
+              base_location: area.base_location || "",
+              areas: Array.isArray(area.areas) ? area.areas : [],
+              note: area.note || "",
+            },
+            promise: {
+              label: promise.subheading || promise.heading || "",
+              title: promise.heading || "",
+              content: promise.content || "",
+            },
+            footer: {
+              tagline: footer.tagline || raw.main_slogan || "",
+            },
+          },
+        };
+      }
+
+      function escapeMailValue(value) {
+        return encodeURIComponent((value || "").toString().trim());
+      }
+
+      function setQuoteStatus(message, statusType) {
+        const statusEl = document.getElementById("quoteStatus");
+        statusEl.textContent = message;
+        statusEl.classList.remove("is-error", "is-success", "is-info");
+        if (statusType) {
+          statusEl.classList.add(statusType);
+        }
+      }
+
+      function populateSelectOptions(selectId, options, placeholderText) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = "";
+
+        const placeholderOption = document.createElement("option");
+        placeholderOption.value = "";
+        placeholderOption.textContent = placeholderText;
+        placeholderOption.selected = true;
+        placeholderOption.disabled = true;
+        select.appendChild(placeholderOption);
+
+        options.forEach((option) => {
+          const optionEl = document.createElement("option");
+          optionEl.value = option.value;
+          optionEl.textContent = option.label;
+          select.appendChild(optionEl);
+        });
+      }
+
+      function applyQuoteFormContent(contactSection, company) {
+        const quoteForm = contactSection.quoteForm;
+        if (!quoteForm) {
+          document.querySelector(".quote-form-wrap").style.display = "none";
+          return;
+        }
+        document.querySelector(".quote-form-wrap").style.display = "";
+
+        document.getElementById("quoteFormTitle").textContent = quoteForm.title;
+        document.getElementById("quoteFormDescription").textContent =
+          quoteForm.description;
+        document.getElementById("quoteFormNote").textContent = quoteForm.note;
+        document.getElementById("quoteSubmitBtn").textContent =
+          quoteForm.submitButton;
+        document.getElementById("quoteConsentLabel").textContent =
+          quoteForm.consentLabel;
+
+        document.getElementById("quoteNameLabel").textContent =
+          quoteForm.fields.name.label;
+        document.getElementById("quoteCompanyLabel").textContent =
+          quoteForm.fields.company.label;
+        document.getElementById("quoteEmailLabel").textContent =
+          quoteForm.fields.email.label;
+        document.getElementById("quotePhoneLabel").textContent =
+          quoteForm.fields.phone.label;
+        document.getElementById("quoteProjectTypeLabel").textContent =
+          quoteForm.fields.projectType.label;
+        document.getElementById("quoteTimelineLabel").textContent =
+          quoteForm.fields.timeline.label;
+        document.getElementById("quoteAddressLabel").textContent =
+          quoteForm.fields.address.label;
+        document.getElementById("quoteBudgetLabel").textContent =
+          quoteForm.fields.budget.label;
+        document.getElementById("quoteDetailsLabel").textContent =
+          quoteForm.fields.details.label;
+
+        document.getElementById("quoteName").placeholder =
+          quoteForm.fields.name.placeholder;
+        document.getElementById("quoteCompany").placeholder =
+          quoteForm.fields.company.placeholder;
+        document.getElementById("quoteEmail").placeholder =
+          quoteForm.fields.email.placeholder;
+        document.getElementById("quotePhone").placeholder =
+          quoteForm.fields.phone.placeholder;
+        document.getElementById("quoteTimeline").placeholder =
+          quoteForm.fields.timeline.placeholder;
+        document.getElementById("quoteAddress").placeholder =
+          quoteForm.fields.address.placeholder;
+        document.getElementById("quoteDetails").placeholder =
+          quoteForm.fields.details.placeholder;
+
+        populateSelectOptions(
+          "quoteProjectType",
+          quoteForm.fields.projectType.options,
+          quoteForm.fields.projectType.placeholder,
+        );
+        populateSelectOptions(
+          "quoteBudget",
+          quoteForm.fields.budget.options,
+          quoteForm.fields.budget.placeholder,
+        );
+
+        document.getElementById("quoteForm").dataset.companyName =
+          company.fullName;
+        setQuoteStatus("", null);
+      }
+
+      function getSelectedOptionLabel(selectEl) {
+        if (!selectEl || !selectEl.options || selectEl.selectedIndex < 0) {
+          return "";
+        }
+        return selectEl.options[selectEl.selectedIndex].textContent.trim();
+      }
+
+      function isValidEmail(value) {
+        const email = String(value || "").trim();
+        const at = email.indexOf("@");
+        const lastDot = email.lastIndexOf(".");
+        return at > 0 && lastDot > at + 1 && lastDot < email.length - 1;
+      }
+
+      function buildMailtoBody(formData, quoteForm, company) {
+        const fields = quoteForm.fields;
+        const rows = [
+          `${fields.name.label}: ${formData.get("name") || ""}`,
+          `${fields.company.label}: ${formData.get("company") || ""}`,
+          `${fields.email.label}: ${formData.get("email") || ""}`,
+        //  `${fields.phone.label}: ${formData.get("phone") || ""}`,
+          `${fields.projectType.label}: ${formData.get("projectType") || ""}`,
+          `${fields.timeline.label}: ${formData.get("timeline") || ""}`,
+        //  `${fields.address.label}: ${formData.get("address") || ""}`,
+          `${fields.budget.label}: ${formData.get("budget") || ""}`,
+          `${fields.details.label}:\n${formData.get("details") || ""}`,
+        ];
+
+        return `${quoteForm.mailBodyIntro.replace("{companyName}", company.fullName)}\n\n${rows.join("\n")}`;
+      }
+
+      function handleQuoteSubmit(event) {
+        event.preventDefault();
+        if (!currentLocaleData) {
+          return;
+        }
+
+        const quoteForm = currentLocaleData.sections?.contact?.quoteForm;
+        if (!quoteForm) {
+          return;
+        }
+        const formEl = event.currentTarget;
+        const formData = new FormData(formEl);
+
+        const requiredFields = [
+          "name",
+          "email",
+          "projectType",
+          "address",
+          "details",
+        ];
+        const missingRequired = requiredFields.some(
+          (fieldName) => !String(formData.get(fieldName) || "").trim(),
+        );
+        if (missingRequired || !formData.get("consent")) {
+          setQuoteStatus(quoteForm.validation.missingRequired, "is-error");
+          return;
+        }
+
+        if (!isValidEmail(String(formData.get("email") || "").trim())) {
+          setQuoteStatus(quoteForm.validation.invalidEmail, "is-error");
+          return;
+        }
+
+        formData.set(
+          "projectType",
+          getSelectedOptionLabel(document.getElementById("quoteProjectType")),
+        );
+        formData.set(
+          "budget",
+          getSelectedOptionLabel(document.getElementById("quoteBudget")),
+        );
+
+        const subject = `${quoteForm.mailSubjectPrefix} ${formData.get("projectType")}`;
+        const body = buildMailtoBody(
+          formData,
+          quoteForm,
+          currentLocaleData.company,
+        );
+        const mailtoHref = `mailto:${currentLocaleData.company.email}?subject=${escapeMailValue(subject)}&body=${escapeMailValue(body)}`;
+
+        window.location.href = mailtoHref;
+        setQuoteStatus(quoteForm.status.mailtoLaunched, "is-info");
+      }
+
+      function getInitialLanguage() {
+        const saved = localStorage.getItem("preferredLanguage");
+        if (SUPPORTED_LANGS.has(saved)) {
+          return saved;
+        }
+        return DEFAULT_LANG;
+      }
+
+      function updateLanguageButtons(lang) {
+        const nextLangLabel = lang === "ja" ? "English" : "日本語";
+        const btnDesktop = document.getElementById("translateBtn");
+        const btnMobile = document.getElementById("translateBtnMobile");
+        if (btnDesktop) btnDesktop.textContent = nextLangLabel;
+        if (btnMobile) btnMobile.textContent = nextLangLabel;
+      }
+
+      // ---- Helper: parse directory listing for image files ----
+      function parseDirectoryLinks(htmlText) {
+        const doc = new DOMParser().parseFromString(htmlText, "text/html");
+        return Array.from(doc.querySelectorAll("a[href]")).map((a) =>
+          a.getAttribute("href"),
+        );
+      }
+
+      function isImageFile(fileName) {
+        const ext = fileName.split(".").pop();
+        return ext && IMAGE_EXTENSIONS.has(ext.toLowerCase());
+      }
+
+      function getAlbumNameFromFolderPath(folderPath) {
+        let cleaned = String(folderPath || "");
+        while (cleaned.startsWith("/")) {
+          cleaned = cleaned.slice(1);
+        }
+        while (cleaned.endsWith("/")) {
+          cleaned = cleaned.slice(0, -1);
+        }
+        const parts = cleaned.split("/");
+        return parts[parts.length - 1] || "";
+      }
+
+      function toGalleryItems(folderPath, files) {
+        return files.map((file) => ({
+          image: folderPath + encodeURIComponent(file),
+          alt: file.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " "),
+        }));
+      }
+
+      async function loadGalleryManifest() {
+        if (!galleryManifestPromise) {
+          galleryManifestPromise = fetch(GALLERY_MANIFEST_PATH)
+            .then(async (res) => {
+              if (!res.ok) return null;
+              const data = await res.json();
+              return data && typeof data === "object" ? data : null;
+            })
+            .catch(() => null);
+        }
+        return galleryManifestPromise;
+      }
+
+      // ---- Gallery: dynamic fetch for each album folder ----
+      async function fetchAlbumImages(folderPath) {
+        try {
+          const albumName = getAlbumNameFromFolderPath(folderPath);
+          const manifest = await loadGalleryManifest();
+          const manifestFiles = manifest?.albums?.[albumName];
+          if (Array.isArray(manifestFiles) && manifestFiles.length > 0) {
+            const files = manifestFiles
+              .filter((file) => typeof file === "string" && isImageFile(file))
+              .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+            return toGalleryItems(folderPath, files);
+          }
+
+          const res = await fetch(folderPath);
+          if (!res.ok) return [];
+          const html = await res.text();
+          const links = parseDirectoryLinks(html);
+          const imageFiles = links
+            .filter(
+              (href) =>
+                href &&
+                !href.endsWith("/") &&
+                href !== "../" &&
+                isImageFile(href),
+            )
+            .map((href) => {
+              const parts = href.split("/");
+              const fileName = parts[parts.length - 1];
+              try {
+                return decodeURIComponent(fileName);
+              } catch {
+                return fileName;
+              }
+            })
+            .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+          return toGalleryItems(folderPath, imageFiles);
+        } catch (e) {
+          console.warn(`Could not fetch album folder: ${folderPath}`, e);
+          return [];
+        }
+      }
+
+      // ---- Render gallery from config albums ----
+      async function renderGallery(gallerySection, lang) {
+        document.getElementById("galleryLabel").textContent =
+          gallerySection.label;
+        document.getElementById("galleryTitle").innerHTML =
+          gallerySection.title;
+        document.getElementById("galleryDesc").textContent =
+          gallerySection.description;
+
+        const galleryTrack = document.getElementById("galleryTrack");
+        const galleryAlbums = document.getElementById("galleryAlbums");
+
+        const pagFirst = document.getElementById("pagFirst");
+        const pagPrev = document.getElementById("pagPrev");
+        const pagNext = document.getElementById("pagNext");
+        const pagLast = document.getElementById("pagLast");
+        const pagCurrent = document.getElementById("pagCurrent");
+
+        galleryTrack.innerHTML = "";
+        galleryAlbums.innerHTML = "";
+
+        let albumDefs = gallerySection.albums || [];
+        if (albumDefs.length === 0) {
+          const manifest = await loadGalleryManifest();
+          const manifestAlbums = manifest?.albums || {};
+          albumDefs = Object.keys(manifestAlbums).map((folderName) => ({
+            name: folderName,
+            folder: folderName,
+          }));
+        }
+        if (albumDefs.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "gallery-empty";
+          empty.textContent =
+            lang === "ja"
+              ? "アルバムが設定されていません。"
+              : "No albums configured.";
+          galleryTrack.appendChild(empty);
+          pagFirst.disabled = true;
+          pagPrev.disabled = true;
+          pagNext.disabled = true;
+          pagLast.disabled = true;
+          pagCurrent.textContent = "0 / 0";
+          return;
+        }
+
+        const albums = [];
+        for (const def of albumDefs) {
+          const folderPath = GALLERY_ROOT + def.folder + "/";
+          const images = await fetchAlbumImages(folderPath);
+          if (images.length > 0) {
+            albums.push({
+              name: def.name,
+              items: images,
+            });
+          }
+        }
+
+        if (albums.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "gallery-empty";
+          empty.textContent =
+            lang === "ja" ? "画像が見つかりませんでした。" : "No images found.";
+          galleryTrack.appendChild(empty);
+          pagFirst.disabled = true;
+          pagPrev.disabled = true;
+          pagNext.disabled = true;
+          pagLast.disabled = true;
+          pagCurrent.textContent = "0 / 0";
+          return;
+        }
+
+        let currentAlbumIndex = 0;
+        let currentSlideIndex = 0;
+
+        function updatePagination(total, current) {
+          const totalSlides = total || 0;
+          const currentSlide = current || 0;
+          pagCurrent.textContent =
+            totalSlides > 0 ? `${currentSlide + 1} / ${totalSlides}` : "0 / 0";
+          pagFirst.disabled = totalSlides <= 1 || currentSlide === 0;
+          pagPrev.disabled = totalSlides <= 1 || currentSlide === 0;
+          pagNext.disabled =
+            totalSlides <= 1 || currentSlide === totalSlides - 1;
+          pagLast.disabled =
+            totalSlides <= 1 || currentSlide === totalSlides - 1;
+        }
+
+        function setAlbum(albumIndex) {
+          currentAlbumIndex = albumIndex;
+          currentSlideIndex = 0;
+          const activeAlbum = albums[currentAlbumIndex];
+          const activeItems = activeAlbum.items;
+
+          galleryTrack.innerHTML = "";
+
+          activeItems.forEach((item) => {
+            const card = document.createElement("article");
+            card.className = "gallery-item gallery-slide";
+
+            const image = document.createElement("img");
+            image.className = "gallery-img";
+            image.src = item.image;
+            image.alt = item.alt || "";
+            image.loading = "lazy";
+            image.tabIndex = 0;
+            image.onclick = () => openGalleryModal(item.image, item.alt || "");
+            image.onkeydown = (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openGalleryModal(item.image, item.alt || "");
+              }
+            };
+
+            card.appendChild(image);
+            galleryTrack.appendChild(card);
+          });
+
+          Array.from(
+            galleryAlbums.querySelectorAll(".gallery-album-btn"),
+          ).forEach((btn, idx) => {
+            btn.classList.toggle("active", idx === currentAlbumIndex);
+            btn.setAttribute(
+              "aria-pressed",
+              idx === currentAlbumIndex ? "true" : "false",
+            );
+          });
+
+          setSlide(0);
+          updatePagination(activeItems.length, 0);
+        }
+
+        function setSlide(index) {
+          const activeAlbum = albums[currentAlbumIndex];
+          const total = activeAlbum.items.length;
+          currentSlideIndex = Math.max(0, Math.min(index, total - 1));
+          galleryTrack.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+          updatePagination(total, currentSlideIndex);
+        }
+
+        function goToFirst() {
+          setSlide(0);
+        }
+        function goToPrev() {
+          setSlide(currentSlideIndex - 1);
+        }
+        function goToNext() {
+          setSlide(currentSlideIndex + 1);
+        }
+        function goToLast() {
+          const total = albums[currentAlbumIndex].items.length;
+          setSlide(total - 1);
+        }
+
+        pagFirst.onclick = goToFirst;
+        pagPrev.onclick = goToPrev;
+        pagNext.onclick = goToNext;
+        pagLast.onclick = goToLast;
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") goToPrev();
+          if (e.key === "ArrowRight") goToNext();
+        });
+
+        albums.forEach((album, index) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "gallery-album-btn";
+          btn.textContent = album.name;
+          btn.onclick = () => setAlbum(index);
+          galleryAlbums.appendChild(btn);
+        });
+
+        setAlbum(0);
+      }
+
+      const areaMapState = {
+        map: null,
+        tileLayer: null,
+        markers: [],
+        currentKey: null,
+      };
+
+      function normalizeAreaKey(name) {
+        return String(name || "").trim().toLowerCase().replace(/\s+/g, " ");
+      }
+
+      function resolveAreaLatLng(areaName, index, totalCount) {
+        const key = normalizeAreaKey(areaName);
+        const latLngMap = {
+          tokyo: [35.6762, 139.6503],
+          "tokyo metropolis": [35.6762, 139.6503],
+          東京都: [35.6762, 139.6503],
+          saitama: [35.8617, 139.6455],
+          "saitama prefecture": [35.8617, 139.6455],
+          埼玉県: [35.8617, 139.6455],
+          kanagawa: [35.4478, 139.6425],
+          "kanagawa prefecture": [35.4478, 139.6425],
+          神奈川県: [35.4478, 139.6425],
+          chiba: [35.6074, 140.1065],
+          "chiba prefecture": [35.6074, 140.1065],
+          千葉県: [35.6074, 140.1065],
+        };
+        if (latLngMap[key]) return latLngMap[key];
+        if (latLngMap[areaName]) return latLngMap[areaName];
+
+        const count = Math.max(totalCount, 1);
+        const angle = (Math.PI * 2 * index) / count;
+        const center = [35.68, 139.76];
+        const latOffset = Math.sin(angle) * 0.4;
+        const lngOffset = Math.cos(angle) * 0.5;
+        return [center[0] + latOffset, center[1] + lngOffset];
+      }
+
+      function initializeAreaLeafletMap(panel, areas, noteEl, defaultNote, lang) {
+        if (!panel || !window.L) return;
+
+        const legendNodes = Array.from(panel.querySelectorAll(".area-map-legend-item"));
+        const mapEl = document.getElementById("areaLeafletMap");
+        if (!mapEl) return;
+
+        if (!areaMapState.map) {
+          areaMapState.map = L.map(mapEl, {
+            zoomControl: true,
+            attributionControl: true,
+            minZoom: 10,
+            maxZoom: 20,
+          });
+          areaMapState.tileLayer = L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+              attribution: "&copy; OpenStreetMap contributors",
+            },
+          );
+          areaMapState.tileLayer.addTo(areaMapState.map);
+        }
+
+        areaMapState.markers.forEach((marker) => marker.remove());
+        areaMapState.markers = [];
+
+        const markerLayers = [];
+
+        function updateLegendAndNote(activeIndex) {
+          const selectedPrefix = lang === "ja" ? "選択エリア" : "Selected area";
+          legendNodes.forEach((node, idx) => {
+            const isActive = idx === activeIndex;
+            node.classList.toggle("is-active", isActive);
+            node.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+
+          const selectedName = areas[activeIndex] || "";
+          if (!noteEl) return;
+          if (!selectedName) {
+            noteEl.textContent = defaultNote;
+            return;
+          }
+          noteEl.textContent = defaultNote
+            ? `${selectedPrefix}: ${selectedName}  |  ${defaultNote}`
+            : `${selectedPrefix}: ${selectedName}`;
+        }
+
+        function setActiveArea(index, shouldPan) {
+          const safeIndex = Math.max(0, Math.min(index, areaMapState.markers.length - 1));
+          if (!areaMapState.markers[safeIndex]) return;
+
+          areaMapState.currentKey = normalizeAreaKey(areas[safeIndex]);
+
+          areaMapState.markers.forEach((marker, idx) => {
+            const isActive = idx === safeIndex;
+            marker.setStyle({
+              radius: isActive ? 9 : 7,
+              fillOpacity: isActive ? 0.95 : 0.85,
+              color: isActive ? "#d6402d" : "#1e5a8f",
+              weight: isActive ? 3 : 2,
+            });
+          });
+
+          if (shouldPan) {
+            areaMapState.map.panTo(areaMapState.markers[safeIndex].getLatLng(), {
+              animate: true,
+              duration: 0.6,
+            });
+          }
+
+          updateLegendAndNote(safeIndex);
+        }
+
+        areas.forEach((areaName, index) => {
+          const latLng = resolveAreaLatLng(areaName, index, areas.length);
+          const marker = L.circleMarker(latLng, {
+            radius: 7,
+            color: "#1e5a8f",
+            weight: 2,
+            fillColor: "#e34c3a",
+            fillOpacity: 0.85,
+          })
+            .addTo(areaMapState.map)
+            .bindTooltip(areaName, {
+              direction: "top",
+              offset: [0, -8],
+              opacity: 0.98,
+              className: "area-map-tooltip",
+            });
+
+          marker.on("click", () => setActiveArea(index, false));
+          areaMapState.markers.push(marker);
+          markerLayers.push(marker);
+        });
+
+        legendNodes.forEach((node, idx) => {
+          node.setAttribute("role", "button");
+          node.setAttribute("tabindex", "0");
+          node.onclick = () => setActiveArea(idx, true);
+          node.onkeydown = (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setActiveArea(idx, true);
+            }
+          };
+        });
+
+        const bounds = L.latLngBounds(markerLayers.map((marker) => marker.getLatLng()));
+        if (bounds.isValid()) {
+          areaMapState.map.fitBounds(bounds.pad(2.4), {
+            animate: false,
+          });
+        } else {
+          areaMapState.map.setView([35.6762, 139.6503], 7);
+        }
+
+        setTimeout(() => {
+          areaMapState.map.invalidateSize();
+          setActiveArea(0, false);
+        }, 30);
+      }
+
+      // ============ APPLY CONTENT ============
+      async function applyContent(data, lang) {
+        const c = data.company;
+        const s = data.sections;
+        const ui = data.ui;
+        const servicesUi = data.servicesUi || {};
+
+        function setSectionAndNavVisibility(sectionId, navId, visible) {
+          const sectionEl = document.getElementById(sectionId);
+          const navEl = document.getElementById(navId);
+          if (sectionEl) {
+            sectionEl.style.display = visible ? "" : "none";
+          }
+          if (navEl && navEl.parentElement) {
+            navEl.parentElement.style.display = visible ? "" : "none";
+          }
+        }
+
+        document.documentElement.lang = lang;
+        document.title =
+          data.meta && data.meta.title ? data.meta.title : document.title;
+
+        // --- Company basics ---
+        document.getElementById("companyName").textContent = c.name;
+        document.getElementById("companySubtitle").textContent = c.subtitle;
+        
+        /* document.getElementById("heroKanji").textContent = c.kanji; */
+
+        // const heroCompanyNameEl = document.getElementById("heroCompanyName");
+
+        //const companyDisplayName = String(data.company_name || c.fullName || "");
+        //if (lang === "ja" && companyDisplayName.startsWith("株式会社")) {
+        //  const restName = companyDisplayName.replace(/^株式会社\s*/, "");
+        //  heroCompanyNameEl.innerHTML =
+        //    `<span class="hero-company-prefix">株式会社</span>${restName}`;
+        //} else {
+        //  heroCompanyNameEl.textContent = companyDisplayName;
+        //}
+        
+        document.getElementById("heroFullNameSuffix").textContent = "";
+        document.getElementById("heroMainSlogan").textContent =
+          data.main_slogan || "";
+        document.getElementById("heroSubSlogan").textContent =
+          data.sub_slogan || c.heroTagline || "";
+        /*document.getElementById("heroIntroduction").textContent =
+          data.introduction || "";
+        */  
+        //document.getElementById("phone").textContent = c.phone;
+        document.getElementById("email").textContent = c.email;
+        //document.getElementById("address").textContent = c.address;
+        document.getElementById("emailLink").href = "mailto:" + c.email;
+        document.getElementById("footerCompanyName").textContent = c.name;
+        document.getElementById("copyright").textContent = c.copyright;
+
+        // --- Static UI labels ---
+        document.getElementById("navAbout").textContent =
+          s.meaning?.label || ui.nav.meaning;
+        document.getElementById("navServices").textContent =
+          s.services?.label || ui.nav.services;
+        document.getElementById("navWhyChoose").textContent =
+          s.values?.label || ui.nav.values;
+        document.getElementById("navWorkFlow").textContent =
+          s.process?.label || ui.nav.process;
+        document.getElementById("navArea").textContent =
+          s.area?.title || ui.nav.area;
+        document.getElementById("navPromise").textContent =
+          s.promise?.title || ui.nav.promise;
+        document.getElementById("navContact").textContent = ui.nav.contact;
+        document
+          .getElementById("hamburger")
+          .setAttribute("aria-label", ui.aria.menu);
+        document.getElementById("heroPrimaryBtn").textContent =
+          ui.hero.primaryButton;
+        document.getElementById("heroSecondaryBtn").textContent =
+          ui.hero.secondaryButton;
+        document.getElementById("scrollLabel").textContent =
+          ui.hero.scrollLabel;
+        document.getElementById("emailLink").textContent = ui.contact.button;
+        document.getElementById("footerCompanySuffix").textContent =
+          ui.footer.companySuffix;
+        document.getElementById("cardYuiImage").alt = ui.images.yuiAlt;
+        document.getElementById("cardMitsuImage").alt = ui.images.mitsuAlt;
+
+        const hasMeaning = !!s.meaning;
+        const hasServices = !!s.services;
+        const hasValues = !!s.values;
+        const hasProcess = !!s.process;
+        const hasGallery = !!s.gallery;
+        const hasArea = !!s.area;
+        const hasPromise = !!s.promise;
+        const hasContact = !!s.contact;
+
+        setSectionAndNavVisibility("about", "navAbout", hasMeaning);
+        setSectionAndNavVisibility("services", "navServices", hasServices);
+        setSectionAndNavVisibility("why-choose", "navWhyChoose", hasValues);
+        setSectionAndNavVisibility("work-flow", "navWorkFlow", hasProcess);
+        setSectionAndNavVisibility("area", "navArea", hasArea);
+        setSectionAndNavVisibility("promise", "navPromise", hasPromise);
+        setSectionAndNavVisibility("contact", "navContact", hasContact);
+
+        // --- Meaning section ---
+        if (hasMeaning) {
+          document.getElementById("meaningLabel").textContent = s.meaning.label;
+          document.getElementById("meaningTitle").innerHTML = s.meaning.title;
+          document.getElementById("meaningDesc").textContent =
+            s.meaning.description;
+          const introText = String(
+            data.introduction || s.meaning?.introduction || "",
+          ).trim();
+          const introEl = document.getElementById("meaningIntro");
+          const introPanelEl = document.getElementById("meaningIntroPanel");
+          if (introText) {
+            introEl.textContent = introText;
+            introPanelEl.style.display = "";
+          } else {
+            introEl.textContent = "";
+            introPanelEl.style.display = "none";
+          }
+          document.getElementById("kanjiYuiCard").textContent = c.kanjiYui;
+          document.getElementById("cardYuiReading").textContent =
+            s.meaning.cardYui.reading;
+          document.getElementById("cardYuiTitle").textContent =
+            s.meaning.cardYui.title;
+          document.getElementById("cardYuiText").innerHTML =
+            s.meaning.cardYui.text;
+          document.getElementById("kanjiMitsuCard").textContent = c.kanjiMitsu;
+          document.getElementById("cardMitsuReading").textContent =
+            s.meaning.cardMitsu.reading;
+          document.getElementById("cardMitsuTitle").textContent =
+            s.meaning.cardMitsu.title;
+          document.getElementById("cardMitsuText").innerHTML =
+            s.meaning.cardMitsu.text;
+        }
+
+        // --- Services ---
+        if (hasServices) {
+          document.getElementById("servicesLabel").textContent = s.services.label;
+          document.getElementById("servicesTitle").innerHTML = s.services.title;
+          document.getElementById("servicesDesc").textContent =
+            s.services.description;
+        }
+        const servicesGrid = document.getElementById("servicesGrid");
+        servicesGrid.innerHTML = "";
+        (s.services?.items || []).forEach((item) => {
+          const iconClass = item.icon || "fa-solid fa-circle-check";
+          const card = document.createElement("div");
+          card.className = "service-card";
+          card.innerHTML = `<span class="service-icon"><i class="${iconClass}" aria-hidden="true"></i></span><h4>${item.title}</h4><p>${item.description}</p>`;
+          servicesGrid.appendChild(card);
+        });
+
+        const additionalServices = Array.isArray(s.services?.additional_services)
+          ? s.services.additional_services
+          : [];
+        const servicesExtra = document.getElementById("servicesExtra");
+        const servicesExtraTitle = document.getElementById("servicesExtraTitle");
+        const servicesExtraList = document.getElementById("servicesExtraList");
+        servicesExtraList.innerHTML = "";
+        if (additionalServices.length > 0) {
+          servicesExtraTitle.textContent =
+            servicesUi.extraTitle || (lang === "ja" ? "追加サービス" : "Additional Services");
+          additionalServices.forEach((service) => {
+            const li = document.createElement("li");
+            const iconClass = service.icon || "fa-solid fa-circle-check";
+            li.className = "services-extra-item";
+            li.innerHTML = `
+              <span class="services-extra-icon" aria-hidden="true"><i class="${iconClass}"></i></span>
+              <span class="services-extra-copy">
+                <strong>${service.title}</strong>
+                ${service.description ? `<small>${service.description}</small>` : ""}
+              </span>
+            `;
+            servicesExtraList.appendChild(li);
+          });
+          servicesExtra.style.display = "";
+        } else {
+          servicesExtra.style.display = "none";
+        }
+
+        // --- Values ---
+        if (hasValues) {
+          document.getElementById("valuesLabel").textContent = s.values.label;
+          document.getElementById("valuesTitle").innerHTML = s.values.title;
+        }
+        const valuesList = document.getElementById("valuesList");
+        valuesList.innerHTML = "";
+        (s.values?.items || []).forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "value-item";
+          div.innerHTML = `<div class="value-number">${item.number}</div><h4>${item.title}</h4><p>${item.description}</p>`;
+          valuesList.appendChild(div);
+        });
+
+        // --- Process ---
+        // --- Area ---
+        if (hasArea) {
+          document.getElementById("areaLabel").textContent = s.area.label || "";
+          document.getElementById("areaTitle").textContent = s.area.title || "";
+          document.getElementById("areaBaseLocation").textContent =
+            s.area.base_location || "";
+          const areaLegendList = document.getElementById("areaLegendList");
+          const areaPanel = document.getElementById("areaPanel");
+          areaLegendList.innerHTML = "";
+          const areaNames = s.area.areas || [];
+          areaNames.forEach((areaName) => {
+            const legendItem = document.createElement("li");
+            legendItem.className = "area-map-legend-item";
+            legendItem.innerHTML = `<span class="area-map-legend-dot" aria-hidden="true"></span><span>${areaName}</span>`;
+            areaLegendList.appendChild(legendItem);
+          });
+          const areaNoteEl = document.getElementById("areaNote");
+          const defaultAreaNote = s.area.note || "";
+          areaNoteEl.textContent = defaultAreaNote;
+          areaPanel.style.display = "";
+          initializeAreaLeafletMap(
+            areaPanel,
+            areaNames,
+            areaNoteEl,
+            defaultAreaNote,
+            lang,
+          );
+        }
+
+        if (hasGallery) {
+          await renderGallery(s.gallery, lang);
+        }
+
+        // --- Promise ---
+        if (hasPromise) {
+          document.getElementById("promiseLabel").textContent =
+            s.promise.label || "";
+          document.getElementById("promiseTitle").textContent =
+            s.promise.title || "";
+          document.getElementById("promiseContent").textContent =
+            s.promise.content || "";
+        }
+
+        if (hasProcess) {
+          document.getElementById("processLabel").textContent = s.process.label;
+          document.getElementById("processTitle").innerHTML = s.process.title;
+          document.getElementById("processDesc").textContent =
+            s.process.description;
+        }
+        const timeline = document.getElementById("processTimeline");
+        timeline.innerHTML = "";
+        (s.process?.items || []).forEach((item, index) => {
+          const step = document.createElement("div");
+          step.className = "process-step";
+          const numberText = String(item.number || index + 1)
+            .replace(/^Step\s*/i, "")
+            .trim();
+          step.innerHTML = `
+                    <div class="process-marker">
+                      <div class="process-number">${numberText}</div>
+                    </div>
+                    <div class="process-content">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                `;
+          timeline.appendChild(step);
+        });
+
+        // --- Contact ---
+        if (hasContact) {
+          document.getElementById("contactTitle").innerHTML = s.contact.title;
+          document.getElementById("contactDesc").innerHTML =
+            s.contact.description.replace("{companyName}", c.fullName);
+          applyQuoteFormContent(s.contact, c);
+        }
+
+        // --- Footer ---
+        document.getElementById("footerTagline").textContent = s.footer.tagline;
+
+        updateLanguageButtons(lang);
+        initScrollAnimations();
+        initSectionTransitions();
+      }
+
+      async function loadContent(lang) {
+        const selectedLang = SUPPORTED_LANGS.has(lang) ? lang : DEFAULT_LANG;
+        const localePath = getLocalePath(selectedLang);
+        try {
+          const response = await fetch(localePath);
+          if (!response.ok) {
+            throw new Error(`Failed to load ${localePath}`);
+          }
+          const rawData = await response.json();
+          const data = normalizeLocaleData(rawData, selectedLang);
+          await applyContent(data, selectedLang);
+          currentLocaleData = data;
+          currentLang = selectedLang;
+          localStorage.setItem("preferredLanguage", selectedLang);
+        } catch (error) {
+          console.warn("Could not load localized config", error);
+          if (selectedLang !== DEFAULT_LANG) {
+            await loadContent(DEFAULT_LANG);
+          }
+        }
+      }
+
+      function toggleTranslate() {
+        const nextLang = currentLang === "ja" ? "en" : "ja";
+        loadContent(nextLang);
+      }
+
+      document
+        .getElementById("quoteForm")
+        .addEventListener("submit", handleQuoteSubmit);
+
+      initGalleryModal();
+
+      loadContent(getInitialLanguage());
+
+      // ========== NAV / ANIMATION ==========
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // ========== SCROLL-BASED 3D SYSTEM ==========
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      function setupHeroParallax() {
+        if (prefersReducedMotion) return;
+        const hero = document.getElementById("home");
+        if (!hero) return;
+        const grid = hero.querySelector(".hero-grid-bg");
+        const overlay = hero.querySelector(".hero-bg-overlay");
+        const kanji = hero.querySelector(".hero-kanji");
+        const content = hero.querySelector(".hero-content");
+        const indicator = hero.querySelector(".hero-scroll-indicator");
+        let ticking = false;
+
+        function update() {
+          ticking = false;
+          const heroHeight = hero.offsetHeight || window.innerHeight;
+          const progress = Math.min(
+            Math.max(window.scrollY / heroHeight, 0),
+            1,
+          );
+          if (grid)
+            grid.style.transform = `translateY(${progress * 90}px) scale(${1 + progress * 0.1})`;
+          if (overlay) overlay.style.opacity = String(1 - progress * 0.35);
+          if (kanji)
+            kanji.style.transform = `translate3d(0, ${progress * -50}px, 0) scale(${1 - progress * 0.12})`;
+          if (content) {
+            content.style.transform = `translate3d(0, ${progress * 70}px, 0)`;
+            content.style.opacity = String(Math.max(1 - progress * 1.4, 0));
+          }
+          if (indicator)
+            indicator.style.opacity = String(Math.max(1 - progress * 4, 0));
+        }
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(update);
+              ticking = true;
+            }
+          },
+          { passive: true },
+        );
+        update();
+      }
+
+      const HOVER_LIFT = {
+        "meaning-card": -6,
+        "service-card": -5,
+        "gallery-item": -6,
+        "value-item": -4,
+        "process-step": -4,
+        "contact-card": 0,
+      };
+      function bindTilt(el) {
+        if (el.dataset.tiltBound === "true") return;
+        el.dataset.tiltBound = "true";
+        el.setAttribute("data-tilt", "");
+        const liftClass = Object.keys(HOVER_LIFT).find((c) =>
+          el.classList.contains(c),
+        );
+        const lift = liftClass ? HOVER_LIFT[liftClass] : -4;
+        const strength = 5;
+        el.addEventListener("mousemove", (e) => {
+          if (prefersReducedMotion) return;
+          const rect = el.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          el.style.transform = `perspective(1000px) translateY(${lift}px) rotateY(${x * strength}deg) rotateX(${-y * strength}deg) translateZ(6px)`;
+        });
+        el.addEventListener("mouseleave", () => {
+          el.style.transform = "";
+        });
+      }
+
+      let revealObserver = null;
+      let sectionObserver = null;
+      function initScrollAnimations() {
+        const revealSelectors = [
+          ".meaning-card",
+          ".service-card",
+          ".gallery-item",
+          ".value-item",
+          ".process-step",
+          ".contact-card",
+          ".section-title",
+          ".section-label",
+          ".philosophy-banner .banner-text",
+          ".philosophy-banner .combined-kanji",
+        ].join(", ");
+
+        if (revealObserver) revealObserver.disconnect();
+
+        if (prefersReducedMotion) {
+          document
+            .querySelectorAll(revealSelectors)
+            .forEach((el) => bindTilt(el));
+          return;
+        }
+
+        revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+        );
+
+        let groupIndex = 0;
+        let lastParent = null;
+        document.querySelectorAll(revealSelectors).forEach((el) => {
+          el.setAttribute("data-reveal", "");
+          el.classList.remove("in-view");
+          groupIndex = el.parentElement === lastParent ? groupIndex + 1 : 0;
+          lastParent = el.parentElement;
+          el.style.transitionDelay = `${Math.min(groupIndex, 5) * 0.09}s`;
+          revealObserver.observe(el);
+
+          if (
+            el.matches(
+              ".meaning-card, .service-card, .gallery-item, .value-item, .process-step",
+            )
+          ) {
+            bindTilt(el);
+          }
+        });
+      }
+
+      function initSectionTransitions() {
+        if (sectionObserver) sectionObserver.disconnect();
+
+        const sections = Array.from(document.querySelectorAll("section")).filter(
+          (section) => !section.classList.contains("hero"),
+        );
+
+        sections.forEach((section) => {
+          section.classList.add("section-transition-target");
+          if (prefersReducedMotion) {
+            section.classList.remove("is-section-near", "is-section-current");
+            return;
+          }
+          section.classList.remove("is-section-near", "is-section-current");
+        });
+
+        if (prefersReducedMotion) return;
+
+        sectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const ratio = entry.intersectionRatio;
+              const section = entry.target;
+              section.classList.toggle(
+                "is-section-near",
+                entry.isIntersecting && ratio > 0.08,
+              );
+              section.classList.toggle(
+                "is-section-current",
+                entry.isIntersecting && ratio > 0.42,
+              );
+            });
+          },
+          {
+            threshold: [0.08, 0.2, 0.42, 0.62],
+            rootMargin: "-12% 0px -12% 0px",
+          },
+        );
+
+        sections.forEach((section) => sectionObserver.observe(section));
+      }
+
+      setupHeroParallax();
+      initSectionTransitions();
+    </script>
+  </body>
+</html>

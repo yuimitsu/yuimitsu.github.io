@@ -1,0 +1,448 @@
+{
+  "company_name": "YUIMITSU Co., Ltd.",
+  "main_slogan": "Building Connections. Delivering Satisfaction. Creating the Future.",
+  "sub_slogan": "From Demolition to Remodeling & Renovation — Complete Building Solutions Under One Roof.",
+  "introduction": "At YUIMITSU Co., Ltd., we provide comprehensive building solutions, specializing in restoration work, interior demolition, wooden house demolition, and property clearance. Our expertise also includes reinforced concrete (RC) demolition, steel structure demolition, underground obstruction removal, tree felling and stump removal, industrial waste collection and transportation, remodeling, and renovation. We believe demolition is not simply about tearing down structures—it is about preparing the foundation for new opportunities. Every project is approached with integrity, precision, and a commitment to quality. Our goal is to deliver safe, reliable, and professional services while building long-lasting relationships with our clients and partners.",
+  "about_us": {
+    "heading": "ABOUT US",
+    "subheading": "",
+    "content": "Building Connections. Delivering Satisfaction. Creating the Future. The name YUIMITSU reflects the values that define who we are. \"YUI (結)\" represents connection, trust, and meaningful relationships. \"MITSU (満)\" represents fulfillment, satisfaction, and our commitment to delivering outstanding results. These principles guide every project we undertake. At YUIMITSU, we believe every building has the potential for a new beginning. Whether through demolition, restoration, remodeling, or renovation, we help transform properties into spaces that support the future.",
+    "label": "About Us",
+    "title": "Building Connections. Delivering Satisfaction. Creating the Future.",
+    "description": "The name YUIMITSU reflects the values that define who we are. \"YUI (結)\" represents connection, trust, and meaningful relationships. \"MITSU (満)\" represents fulfillment, satisfaction, and our commitment to delivering outstanding results. These principles guide every project we undertake.",
+    "cardYui": {
+      "reading": "Yui - ゆい",
+      "title": "Connection & Trust",
+      "text": "<span class=\"highlight\">\"結\" (Yui)</span> represents connection, trust, and meaningful relationships. We believe that building <span class=\"highlight\">strong ties</span> with our clients, partners, and communities is the foundation of great work."
+    },
+    "cardMitsu": {
+      "reading": "Mitsu - みつ",
+      "title": "Fulfillment & Satisfaction",
+      "text": "<span class=\"highlight\">\"満\" (Mitsu)</span> represents fulfillment, satisfaction, and abundance. Every project we complete is an opportunity to <span class=\"highlight\">deliver real value</span> and peace of mind to those we serve."
+    },
+    "philosophy": "Together, `結満 (YuiMitsu)` represents our commitment to connecting people, creating lasting bonds, and bringing fulfillment through our work. We do not just tear down structures - we clear the way for new beginnings, built on trust."
+  },
+  "services": {
+    "heading": "OUR SERVICES",
+    "subheading": "Core Services",
+    "core_services": [
+      {
+        "name": "Restoration Work",
+        "description": "Professional restoration services for residential, commercial, office, retail, and rental properties."
+      },
+      {
+        "name": "Interior Demolition",
+        "description": "Safe and efficient interior demolition for homes, offices, commercial buildings, and retail spaces."
+      },
+      {
+        "name": "Wooden House Demolition",
+        "description": "Complete demolition services for wooden houses, warehouses, garages, and other timber structures."
+      },
+      {
+        "name": "Property Clearance",
+        "description": "Removal and disposal of furniture, appliances, household goods, office equipment, and unwanted items before demolition or renovation."
+      }
+    ],
+    "additional_services": [
+      {
+        "icon": "fa-solid fa-building",
+        "title": "Reinforced Concrete (RC) Demolition",
+        "description": "Controlled dismantling of reinforced concrete structures."
+      },
+      {
+        "icon": "fa-solid fa-industry",
+        "title": "Steel Structure Demolition",
+        "description": "Safe teardown of steel-framed buildings and facilities."
+      },
+      {
+        "icon": "fa-solid fa-helmet-safety",
+        "title": "Underground Obstruction Removal",
+        "description": "Removal of buried foundations, tanks, and obstacles."
+      },
+      {
+        "icon": "fa-solid fa-leaf",
+        "title": "Tree Felling & Stump Removal",
+        "description": "Site-clearing support for trees, roots, and vegetation."
+      },
+      {
+        "icon": "fa-solid fa-truck",
+        "title": "Industrial Waste Collection & Transportation",
+        "description": "Licensed transport and proper handling of construction waste."
+      },
+      {
+        "icon": "fa-solid fa-house-chimney",
+        "title": "Remodeling",
+        "description": "Functional upgrades to existing interior and exterior spaces."
+      },
+      {
+        "icon": "fa-solid fa-pen-ruler",
+        "title": "Renovation",
+        "description": "Comprehensive space transformation for long-term value."
+      }
+    ],
+    "label": "Our Services",
+    "title": "Comprehensive <strong>Building Solutions</strong>",
+    "description": "From restoration and demolition to remodeling and renovation, we offer a full range of services tailored to your needs.",
+    "items": [
+      {
+        "icon": "fa-solid fa-arrow-rotate-left",
+        "title": "Restoration Work",
+        "description": "Professional restoration services for residential, commercial, office, retail, and rental properties before handover."
+      },
+      {
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "title": "Interior Demolition",
+        "description": "Safe and efficient demolition of interiors for homes, offices, commercial buildings, and retail spaces."
+      },
+      {
+        "icon": "fa-solid fa-tree",
+        "title": "Wooden House Demolition",
+        "description": "Complete demolition of wooden houses, warehouses, garages, and other timber structures."
+      },
+      {
+        "icon": "fa-solid fa-trash-can",
+        "title": "Property Clearance",
+        "description": "Removal and disposal of furniture, appliances, household goods, and unwanted items before demolition or renovation."
+      },
+      {
+        "icon": "fa-solid fa-building",
+        "title": "RC Demolition",
+        "description": "Safe and controlled demolition of reinforced concrete buildings and structures."
+      },
+      {
+        "icon": "fa-solid fa-industry",
+        "title": "Steel Structure Demolition",
+        "description": "Professional demolition of factories, warehouses, and steel-framed commercial buildings."
+      },
+      {
+        "icon": "fa-solid fa-helmet-safety",
+        "title": "Underground Obstruction Removal",
+        "description": "Removal of underground foundations, concrete, septic tanks, buried debris, and other hidden obstacles."
+      },
+      {
+        "icon": "fa-solid fa-leaf",
+        "title": "Tree Felling & Stump Removal",
+        "description": "Safe removal of trees, stumps, bamboo, and overgrown vegetation from your site."
+      },
+      {
+        "icon": "fa-solid fa-truck",
+        "title": "Industrial Waste Transport",
+        "description": "Licensed collection and transportation of industrial waste in full compliance with environmental regulations."
+      },
+      {
+        "icon": "fa-solid fa-house-chimney",
+        "title": "Remodeling",
+        "description": "Upgrading and improving existing homes, offices, and commercial properties to better suit your needs."
+      },
+      {
+        "icon": "fa-solid fa-pen-ruler",
+        "title": "Renovation",
+        "description": "Transforming existing spaces by enhancing functionality, design, and long-term value."
+      }
+    ]
+  },
+  "why_choose_us": {
+    "heading": "WHY CHOOSE YUIMITSU?",
+    "subheading": "",
+    "points": [
+      {
+        "title": "One Trusted Partner from Demolition to Renovation",
+        "description": "From demolition and waste management to remodeling and renovation, we provide complete project solutions under one roof, ensuring efficiency, consistency, and reliable quality."
+      },
+      {
+        "title": "Quality Without Compromise",
+        "description": "We believe that every project deserves careful planning, skilled workmanship, and attention to detail. Our commitment is to deliver results that stand the test of time."
+      },
+      {
+        "title": "Safety & Compliance",
+        "description": "Safety is our highest priority. We strictly follow all applicable regulations while maintaining responsible environmental practices and respectful communication with neighboring communities."
+      },
+      {
+        "title": "Experience & Professionalism",
+        "description": "Our experienced team handles projects of all sizes, from residential homes to commercial facilities, always providing practical solutions tailored to each client's needs."
+      },
+      {
+        "title": "Transparent Consultation",
+        "description": "Every project begins with a thorough site inspection and consultation. We provide clear recommendations and customized proposals based on the actual condition of the property and your project goals."
+      }
+    ],
+    "label": "Why Choose YUIMITSU",
+    "title": "One Trusted Partner <strong>from Demolition to Renovation</strong>",
+    "items": [
+      {
+        "number": "01",
+        "title": "One‑Stop Solution",
+        "description": "From demolition and waste management to remodeling and renovation, we provide complete project solutions under one roof, ensuring efficiency, consistency, and reliable quality."
+      },
+      {
+        "number": "02",
+        "title": "Quality Without Compromise",
+        "description": "Every project receives careful planning, skilled workmanship, and attention to detail. Our commitment is to deliver results that stand the test of time."
+      },
+      {
+        "number": "03",
+        "title": "Safety & Compliance",
+        "description": "Safety is our highest priority. We strictly follow all applicable regulations, maintain responsible environmental practices, and communicate respectfully with neighboring communities."
+      },
+      {
+        "number": "04",
+        "title": "Experience & Professionalism",
+        "description": "Our experienced team handles projects of all sizes, from residential homes to commercial facilities, providing practical solutions tailored to each client's needs."
+      },
+      {
+        "number": "05",
+        "title": "Transparent Consultation",
+        "description": "Every project begins with a thorough site inspection and consultation. We provide clear recommendations and customized proposals based on actual conditions and your goals."
+      }
+    ]
+  },
+  "work_flow": {
+    "heading": "OUR PROCESS",
+    "subheading": "",
+    "steps": [
+      {
+        "step": "Step 1",
+        "title": "Contact Us",
+        "description": "Tell us about your project by phone, email, or through our online inquiry form."
+      },
+      {
+        "step": "Step 2",
+        "title": "Site Inspection",
+        "description": "Our team visits your property to understand your requirements and evaluate the site."
+      },
+      {
+        "step": "Step 3",
+        "title": "Proposal & Estimate",
+        "description": "We prepare a detailed proposal tailored to your project and objectives."
+      },
+      {
+        "step": "Step 4",
+        "title": "Agreement",
+        "description": "Once the proposal is approved, we schedule the work and begin preparations."
+      },
+      {
+        "step": "Step 5",
+        "title": "Construction",
+        "description": "Our skilled professionals carry out the project safely, efficiently, and with careful attention to quality."
+      },
+      {
+        "step": "Step 6",
+        "title": "Completion & Handover",
+        "description": "After a final inspection, we complete the project and hand it over with confidence."
+      },{
+        "step": "Step 7",
+        "title": "Aftercare",
+        "description": "If you have any questions or concerns after the work is completed, please don’t hesitate to contact us."
+      }
+    ],
+    "label": "Our Process",
+    "title": "Your Journey with <strong>7 Simple Steps</strong>",
+    "description": "From your first inquiry to final handover, we ensure clear communication and consistent quality at every stage.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Contact Us",
+        "description": "Tell us about your project by phone, email, or through our online inquiry form."
+      },
+      {
+        "number": "02",
+        "title": "Site Inspection",
+        "description": "Our team visits your property to understand your requirements and evaluate the site."
+      },
+      {
+        "number": "03",
+        "title": "Proposal & Estimate",
+        "description": "We prepare a detailed proposal tailored to your project and objectives."
+      },
+      {
+        "number": "04",
+        "title": "Agreement",
+        "description": "Once the proposal is approved, we schedule the work and begin preparations."
+      },
+      {
+        "number": "05",
+        "title": "Construction",
+        "description": "Our skilled professionals carry out the project safely, efficiently, and with careful attention to quality."
+      },
+      {
+        "number": "06",
+        "title": "Completion & Handover",
+        "description": "After a final inspection, we complete the project and hand it over with confidence."
+      },
+      {
+        "number": "07",
+        "title": "Aftercare",
+        "description": "If you have any questions or concerns after the work is completed, please don’t hesitate to contact us."
+      }
+    ]
+  },
+  "area": {
+    "heading": "SERVICE AREA",
+    "subheading": "",
+    "base_location": "Saitama, Japan",
+    "areas": [
+      "Saitama",
+      "Tokyo",
+      "Kanagawa",
+      "Chiba"
+    ],
+    "note": "Projects in other regions are also welcome upon consultation."
+  },
+  "promise": {
+    "heading": "OUR COMMITMENT",
+    "subheading": "",
+    "content": "At YUIMITSU Co., Ltd., we believe lasting trust is earned through consistent quality, honest communication, and dependable service. We are committed to delivering craftsmanship that reflects professionalism, responsibility, and respect for every client. Our mission is not simply to complete projects—but to build lasting partnerships and create value for every property we work on."
+  },
+  "contact": {
+    "heading": "CONTACT US",
+    "text": "Let's Build the Future Together. Whether you need restoration work, demolition, property clearance, industrial waste transportation, remodeling, or renovation, our experienced team is ready to support your project. We welcome inquiries from homeowners, property owners, real estate companies, construction firms, architects, developers, and businesses.",
+    "closing_slogan": "Building Connections. Delivering Satisfaction. Creating the Future.",
+    "company_name": "YUIMITSU Co., Ltd.",
+    "closing_line": "From Demolition to Remodeling & Renovation. Your Trusted Partner for Complete Building Solutions.",
+    "title": "Let’s Build the Future <strong>Together</strong>",
+    "description": "Whether you need restoration work, demolition, property clearance, industrial waste transportation, remodeling, or renovation, our experienced team is ready to support your project. We welcome inquiries from homeowners, property owners, real estate companies, construction firms, architects, developers, and businesses.",
+    "quoteForm": {
+      "title": "Request a Quote",
+      "description": "Tell us about your project and we’ll get back to you with a tailored proposal.",
+      "submitButton": "Send Request",
+      "note": "Typical response time: within 1 business day.",
+      "consentLabel": "I agree that my details may be used to contact me about this request.",
+      "mailSubjectPrefix": "Quote Request:",
+      "mailBodyIntro": "Please review the quote request for {companyName}.",
+      "status": {
+        "mailtoLaunched": "Your email app has been opened with the request details."
+      },
+      "validation": {
+        "missingRequired": "Please complete all required fields and consent before submitting.",
+        "invalidEmail": "Please enter a valid email address."
+      },
+      "fields": {
+        "name": {
+          "label": "Contact Name *",
+          "placeholder": "e.g., Alex Smith"
+        },
+        "company": {
+          "label": "Company / Organization",
+          "placeholder": "e.g., ABC Development"
+        },
+        "email": {
+          "label": "Email *",
+          "placeholder": "name@example.com"
+        },
+        "phone": {
+          "label": "Phone",
+          "placeholder": "+81-xx-xxxx-xxxx"
+        },
+        "projectType": {
+          "label": "Service Interest *",
+          "placeholder": "Select a service",
+          "options": [
+            {
+              "value": "restoration",
+              "label": "Restoration Work"
+            },
+            {
+              "value": "interior",
+              "label": "Interior Demolition"
+            },
+            {
+              "value": "wooden",
+              "label": "Wooden House Demolition"
+            },
+            {
+              "value": "clearance",
+              "label": "Property Clearance"
+            },
+            {
+              "value": "renovation",
+              "label": "Remodeling / Renovation"
+            },
+            {
+              "value": "other",
+              "label": "Other"
+            }
+          ]
+        },
+        "timeline": {
+          "label": "Preferred Timeline",
+          "placeholder": "e.g., Start in October"
+        },
+        "address": {
+          "label": "Site Address *",
+          "placeholder": "Prefecture / City / Lot"
+        },
+        "budget": {
+          "label": "Budget Range",
+          "placeholder": "Select budget range",
+          "options": [
+            {
+              "value": "under-3m",
+              "label": "Under JPY 3M"
+            },
+            {
+              "value": "3m-10m",
+              "label": "JPY 3M – 10M"
+            },
+            {
+              "value": "10m-30m",
+              "label": "JPY 10M – 30M"
+            },
+            {
+              "value": "30m-plus",
+              "label": "JPY 30M+"
+            },
+            {
+              "value": "tbd",
+              "label": "To be discussed"
+            }
+          ]
+        },
+        "details": {
+          "label": "Project Details *",
+          "placeholder": "Building type, floors, hazardous material concerns, access limitations, preferred completion date"
+        }
+      }
+    },
+    "company_kanji": "結満",
+    "company_kanjiYui": "結",
+    "company_kanjiMitsu": "満",
+    "company_short_name": "YUIMITSU",
+    "company_subtitle": "Co., Ltd.",
+    "hero_tagline": "Building Connections. Delivering Satisfaction. Creating the Future. From Demolition to Remodeling & Renovation — Complete Building Solutions Under One Roof.",
+    "phone": "+81 (0)3-XXXX-XXXX",
+    "email": "yuimitsu.info@gmail.com",
+    "address": "Tokyo, Japan",
+    "copyright": "© 2026 YUIMITSU Co., Ltd. All rights reserved."
+  },
+  "meta": {
+    "title": "YUIMITSU Co., Ltd. | Demolition & Renovation"
+  },
+  "ui": {
+    "nav": {
+      "meaning": "About Us",
+      "services": "Services",
+      "gallery": "Projects",
+      "values": "Why Choose Us",
+      "process": "Our Process",
+      "contact": "Contact"
+    },
+    "aria": {
+      "menu": "Menu"
+    },
+    "hero": {
+      "primaryButton": "Request a Consultation",
+      "secondaryButton": "Our Story",
+      "scrollLabel": "Scroll"
+    },
+    "contact": {
+      "button": "Send an Email"
+    },
+    "footer": {
+      "companySuffix": " Co., Ltd."
+    },
+    "images": {
+      "yuiAlt": "Connection and trust",
+      "mitsuAlt": "Fulfillment and satisfaction"
+    }
+  }
+}
